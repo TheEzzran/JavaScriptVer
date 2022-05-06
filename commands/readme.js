@@ -1,20 +1,18 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
+const { MessageActionRow, MessageButton } = require('discord.js')
 
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('readme')
 		.setDescription('Link to Readme on github'),
 	async execute(interaction) {
-    await interaction.deferReply()
-    const dice = interaction.options.getString("dice")
-    const modifier = interaction.options.getString("modifier")
-    let output = ""
-    if (modifier > "") {
-      output = `${interaction.user}` + " rolled " + dice + " Fudge dice + " + parseInt(modifier) + "\n" + Fudge.FudgeDice(dice, modifier)
-    }
-    else {
-      output = `${interaction.user}` + " rolled " + dice + " Fudge dice\n" + Fudge.FudgeDice(dice, modifier)
-    }
-    await interaction.editReply(output)
+    const row = new MessageActionRow()
+			.addComponents(
+				new MessageButton()
+					.setURL('https://github.com/TheEzzran/JavaScriptVer/tree/master#readme')
+					.setLabel('Readme')
+					.setStyle('LINK'),
+			);
+    await interaction.reply({ content: 'Here you go!', ephemeral: true, components: [row] })
 	},
 };

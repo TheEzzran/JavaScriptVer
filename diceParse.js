@@ -1,16 +1,23 @@
 const diceRoll = require('./diceRoller.js');
 
 module.exports = {
-  diceParse: function(quant, size, dropLow, keepLow, reroll, explode, success, cancels, successBonus, rollUnder, add, subtract, multiply, divide) {
+  diceParse: function(quant, size, dropLow, keepLow, reroll, explode, success, cancels, successBonus, rollUnder) {
     console.log("diceParser");
     let rolls = diceRoll.diceRoller(quant,size);
     let results = []; //by the end, [0] should be an array of strings (which is the output results) and [1] is a numeric string with the final totals
     let total = 0; //this is the value that'll get fed into results[1] once the math is done.
     let rollSort = rolls;
     for (let i=0; i<rolls.length; i++) {
-      if (rolls[i] <= reroll) {
-        rolls.push(diceRoll.diceRoller(1, size)[0]);
-        rolls[i] = "~~" + rolls[i].toString() + "~~";
+      if (!rollUnder) {
+        if (rolls[i] <= reroll) {
+          rolls.push(diceRoll.diceRoller(1, size)[0]);
+          rolls[i] = "~~" + rolls[i].toString() + "~~";
+        }
+      }
+      else {
+        if (rolls[i] >= reroll) {
+          rolls.push(diceRoll.diceRoller(1, size)[0]);
+          rolls[i] = "~~" + rolls[i].toString() + "~~";
       }
     }
     if (success > 0 && rollUnder == false) {
@@ -77,7 +84,7 @@ module.exports = {
         }
         rolls[lowRollIndex] = "~~" + rolls[lowRollIndex].toString() + "~~";
       }
-      console.log(quant + ", " + keepLow);
+      //console.log(quant + ", " + keepLow);
       for (let i=0; i < quant - keepLow; i++) {
         let highRollIndex = 0;
         while (!Number.isInteger(rolls[highRollIndex])){
@@ -98,14 +105,9 @@ module.exports = {
         }
       }
     }
-
-    total = total * multiply;
-    console.log("divide: " + divide);
-    total = total / divide;
-    total = total + add;
-    total = total - subtract;
     results.push(rolls);
-    results.push(total.toString());
+    results.push(total);
     return results;
-  },
+  }
+},
 }
