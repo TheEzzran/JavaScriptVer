@@ -3,6 +3,9 @@ const isnum = require('./isNumeric.js');
 
 module.exports = {
   OVADice: function(number) {
+    if (parseInt(number) > 10000) {
+      return "Too many dice!";
+    }
     if (!isnum.isNumeric(number[0])) {
       return "What does that even mean? Gotta be a positive number of dice, chief.";
     }
