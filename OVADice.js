@@ -38,6 +38,9 @@ module.exports = {
     }
     textResults = textResults.slice(0, -2);
     textResults = textResults + "] = " + total.toString();
+    if (textResults.length > 1000) {
+      textResults = "Woah that's too much for Discord to show. Here's the final result though: " + total.toString();
+    }
     return textResults;
   }
 };

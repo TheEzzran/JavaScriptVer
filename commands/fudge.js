@@ -30,6 +30,9 @@ module.exports = {
     if (comment > "") {
       output = output + "\n" + comment
     }
+    if (output.length > 2000) {
+      await interaction.editReply("Message too long to show. Try less dice or a shorter comment.")
+    }
     await interaction.editReply(output)
 	},
 };

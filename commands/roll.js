@@ -19,7 +19,10 @@ module.exports = {
     const comment = interaction.options.getString("comment")
     let output = `${interaction.user}` + " rolled " + dice + "\n" + comParse.commandParser(dice)
     if (comment > "") {
-      output = output + "\n" + comment
+      output = output + comment
+    }
+    if (output.length > 2000) {
+      await interaction.editReply("Message too long to show. Try less dice or a shorter comment.")
     }
 		await interaction.editReply(output)
 	}

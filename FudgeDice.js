@@ -27,6 +27,9 @@ module.exports = {
     }
     total = total + parseInt(modifier);
     textResults = textResults.slice(0, -2) + "] = " + total.toString();
+    if (textResults.length > 1000) {
+      textResults = "Woah that's too much for Discord to show. Here's the final result though: " + total.toString();
+    }
     return textResults;
   }
 };

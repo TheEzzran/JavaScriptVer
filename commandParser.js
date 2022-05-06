@@ -41,7 +41,7 @@ class dicePool {
       this.quant = parseInt(this.quant);
       if (this.size == "") {
         this.error=true;
-        this.errorText="I didn't catch that. What size dice did you want?";
+        this.errorText="I didn't catch that. What size dice did you want?\n";
       }
       this.size = parseInt(this.size); }
       //console.log("pre-mult");
@@ -68,7 +68,7 @@ class dicePool {
       this.dropLow = this.quant - parseInt(this.dropLow);
     }
     else if (dice.indexOf("^") > -1 && this.dropLow > "") {
-      this.errorText = "Keeping highest and dropping the lowest are the same! Pick one!";
+      this.errorText = "Keeping highest and dropping the lowest are the same! Pick one!\n";
       this.error = true;
     }
     if (this.dropLow == "") { this.droplow = 0; }
@@ -87,7 +87,7 @@ class dicePool {
       this.keepLow = this.quant;
     }
     if (dice.indexOf("k") > -1 && this.dropLow > 0) {
-      this.errorText = "Wanna eat your cake and have it too, huh? I can't keep *and* drop the lowest results!";
+      this.errorText = "Wanna eat your cake and have it too, huh? I can't keep *and* drop the lowest results!\n";
       this.error = true;
     }
     if (dice.indexOf("r") > -1) { //Sets the reroll threshold, throws an error if the this.reroll is greater than the size of the die (to prevent infinite rerolling), and sets the reroll threshold to 0 if the reroll modifier isn't present.
@@ -105,7 +105,7 @@ class dicePool {
         this.reroll = parseInt(this.reroll);
       }
       if (this.reroll >= this.size) {
-        this.errorText = "How am I supposed to get higher than " + this.size.toString() + " on a " + this.size.toString() + " sided die?";
+        this.errorText = "How am I supposed to get higher than " + this.size.toString() + " on a " + this.size.toString() + " sided die?\n";
         this.error = true;
       }
     }
@@ -133,7 +133,7 @@ class dicePool {
       this.explode = this.size + 1;
     }
     else if (this.explode <= 1) {
-      this.errorText = "Infinite explosions? COOL! But I'm not crashing today, thanks.";
+      this.errorText = "Infinite explosions? COOL! But I'm not crashing today, thanks.\n";
       this.error = true;
     }
     //console.log("before successes");
@@ -236,7 +236,7 @@ module.exports = {
 
     commandParser: function(dice) {
       if (!isnum.isNumeric(dice[0]) && dice[0] != "d") {
-        return "What does that even mean? Gotta be a positive number of dice, chief.";
+        return "What does that even mean? Gotta be a positive number of dice, chief.\n";
       }
       else if (dice[0] == "d") {
         dice = "1" + dice;
@@ -305,7 +305,7 @@ module.exports = {
         }
       }
       else {
-        output = "How do I hold all these dice!? 1000 is the max for me.";
+        output = "How do I hold all these dice!? 1000 is the max for me.\n";
         return output;
       }
       if (mult * diceQuant <= 300 && mult <= 20) {
@@ -344,7 +344,7 @@ module.exports = {
                   tempOut = tempOut+ y;
                 }
                 else {
-                  output = "Sorry, I can only do math to dice and numbers. Check your formatting!"
+                  output = "Sorry, I can only do math to dice and numbers. Check your formatting!\n"
                   return output;
                 }
               }
@@ -354,7 +354,7 @@ module.exports = {
                   tempOut = tempOut+ y;
                 }
                 else {
-                  output = "Sorry, I can only do math to dice and numbers. Check your formatting!"
+                  output = "Sorry, I can only do math to dice and numbers. Check your formatting!\n"
                   return output;
                 }
               }
@@ -364,13 +364,13 @@ module.exports = {
                   tempOut = tempOut+ y;
                 }
                 else {
-                  output = "Sorry, I can only do math to dice and numbers. Check your formatting!"
+                  output = "Sorry, I can only do math to dice and numbers. Check your formatting!\n"
                   return output;
                 }
               }
               else if (y.indexOf('/') > -1) {
                 if (y.indexOf('/0') > -1 ) {
-                  output = "Not imploding the universe today, thanks.";
+                  output = "Not imploding the universe today, thanks.\n";
                   return output;
                 }
                 if (!isNaN(parseInt(y.slice(1)))) {
@@ -378,7 +378,7 @@ module.exports = {
                   tempOut = tempOut + y;
                 }
                 else {
-                  output = "Sorry, I can only do math to dice and numbers. Check your formatting!"
+                  output = "Sorry, I can only do math to dice and numbers. Check your formatting!\n"
                   return output;
                 }
               }
@@ -401,7 +401,7 @@ module.exports = {
             }
             else if (x.indexOf('/') > -1 && !isNaN(parseInt(x.slice(1)))) {
               if (x.indexOf('/0') > -1) {
-                output = "Not imploding the universe today, thanks";
+                output = "Not imploding the universe today, thanks\n";
                 return output;
               }
               temp = temp / parseInt(x.slice(1));
@@ -410,7 +410,7 @@ module.exports = {
               temp = temp + parseInt(x);
             }
             else {
-              output = "Sorry, I can only do math to dice and numbers. Check your formatting!"
+              output = "Sorry, I can only do math to dice and numbers. Check your formatting!\n"
               return output;
             }
           }
@@ -424,7 +424,7 @@ module.exports = {
               output = output + diceCom[i];
             }
             else {
-              output = output + "]" + " = " + diceCom[i].toString();
+              output = output + "]" + " = " + diceCom[i].toString() + "\n";
             }
           }
         }
@@ -495,7 +495,7 @@ module.exports = {
               }
               if (y.indexOf("/") > -1) {
                 if (y.indexOf("/0") > -1) {
-                  output = "Not imploding the universe today, thanks.";
+                  output = "Not imploding the universe today, thanks.\n";
                   return output;
                 }
                 let pos = y.indexOf("/");
@@ -514,13 +514,13 @@ module.exports = {
           }
           output = output + total.toString() + ", ";
         }
+        output = output.slice(0,-2) + "\n";
+      }
+      if (output[output.length-2] == "[") {
         output = output.slice(0,-2);
       }
-      if (output[output.length-1] == "[") {
-        output = output.slice(0,-1);
-      }
       if (output.length > 1200) {
-        output = "I think people will get mad if I show that many numbers. Try fewer, or smaller, dice.";
+        output = "I think people will get mad if I show that many numbers. Try fewer, or smaller, dice.\n";
       }
       return output;
     }
