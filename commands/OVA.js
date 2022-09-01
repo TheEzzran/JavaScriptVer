@@ -1,7 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const ova = require('../OVADice.js');
-const { majorID } = require('./config.json');
-const { meID } = require('./config.json');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -20,9 +18,6 @@ module.exports = {
     const comment = interaction.options.getString("comment")
 		const user = interaction.user.id
 		let output = `${interaction.user}` + " rolled " + dice + " OVA dice\n" + ova.OVADice(dice)
-		if (user == majorID) {
-			output = output + "\nThat's your result. Deal with it. :sunglasses:"
-		}
 		if (comment > "") {
 		output = output + "\n" + comment
 		}

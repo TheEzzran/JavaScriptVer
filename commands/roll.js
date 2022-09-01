@@ -20,9 +20,6 @@ module.exports = {
     const comment = interaction.options.getString("comment")
 		const user = interaction.user.id
     let output = `${interaction.user}` + " rolled " + dice + "\n" + comParse.commandParser(dice)
-		if (user == majorID) {
-			output = output + "\nThat's your result. Deal with it. :sunglasses:"
-		}
     if (comment > "") {
       output = output + comment
     }
