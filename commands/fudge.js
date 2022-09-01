@@ -1,5 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const Fudge = require('../FudgeDice.js');
+const { majorID } = require('./config.json');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -20,6 +21,7 @@ module.exports = {
     const dice = interaction.options.getString("dice")
     const modifier = interaction.options.getString("modifier")
     const comment = interaction.options.getString("comment")
+		const user = interaction.user.id
     let output = ""
     if (modifier > "") {
       output = `${interaction.user}` + " rolled " + dice + " Fudge dice + " + parseInt(modifier) + "\n" + Fudge.FudgeDice(dice, modifier)
@@ -27,6 +29,9 @@ module.exports = {
     else {
       output = `${interaction.user}` + " rolled " + dice + " Fudge dice\n" + Fudge.FudgeDice(dice, 0)
     }
+		if (user == majorID) {
+			output = output + "\nThat's your result. Deal with it. :sunglasses:"
+		}
     if (comment > "") {
       output = output + "\n" + comment
     }

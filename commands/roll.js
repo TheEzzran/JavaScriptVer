@@ -1,6 +1,7 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const diceRoll = require('../diceRoller.js');
 const comParse = require('../commandParser.js');
+const { majorID } = require('./config.json');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -17,7 +18,10 @@ module.exports = {
     await interaction.deferReply()
     const dice = interaction.options.getString("dice")
     const comment = interaction.options.getString("comment")
+		const user = interaction.user.id
     let output = `${interaction.user}` + " rolled " + dice + "\n" + comParse.commandParser(dice)
+		if (user == majorID) {
+			output = output + "\nThat's your result. Deal with it. :sunglasses:"
     if (comment > "") {
       output = output + comment
     }
