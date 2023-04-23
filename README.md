@@ -19,9 +19,9 @@ xY -- multiplies the final total by Y
 
 vY -- drops the lowest Y results before adding the rest together. 4d6v1 is 4d6 drop lowest. 5d6v2 would drop the lowest two results.
 
-^Y -- opposite of drop lowest, keeps the highest Y results and discards the rest, before adding the rest to gether. 4d6^3 is the same as 4d6v1.
+^Y -- opposite of drop lowest, keeps the highest Y results and discards the rest, before adding the rest together. 4d6^3 is the same as 4d6v1.
 
-kY -- keep the lowest Y dice, discarding the results. Useful for Disadvantage in D&D. 2d20k1 would roll 2d20 and keep only the worse result.
+kY -- keep the lowest Y dice, discarding the rest. Useful for Disadvantage in D&D. 2d20k1 would roll 2d20 and keep only the worse result.
 
 rY -- sets a threshold, Y, at or below which that die gets rerolled. Instead rerolls dice at or above that threshold if the roll under modifier is present (see below)
 
