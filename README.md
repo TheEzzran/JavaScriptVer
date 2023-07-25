@@ -43,11 +43,19 @@ u -- Inverts the rerolls and success counting. Useful for Roll Under systems lik
 
 ## /genesys
 /genesys rolls dice using the Genesys system's rules (and also FFG's Star Wars RPG, by extension).
+
 G is an Ability die (for Green)
+
 Y is Proficiency die (for Yellow)
+
 P for Difficulty die (for Purple)
+
 R for Challenge die (for Red)
+
 B is Boost (for Blue but also Boost)
+
 S is Setback (for Setback cus B for Black was already taken)
+
 F is Force die.
+
 Format is either '#N' where '#' is a number and N is one of the above letters, or just NNNN. 3G2Y is the same as GGGYY. The bot doesn't care what order the dice are in, and will display the dice in the order they are given. It counts successes, failures, advantages, threats, triumphs, despairs, and both kinds of Force pips.
